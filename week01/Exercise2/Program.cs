@@ -4,7 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the Exercise2 Project.");
+        Console.WriteLine("Hello World! This is the Exercise2 Project.\n");
 
         Console.Write("What is your grade percentage? ");
         string gradePercentString = Console.ReadLine();
@@ -12,6 +12,10 @@ class Program
 
         string letter;
         string words;
+        string sign = "";
+        float plusMinus;
+
+        plusMinus = gradePercent % 10;
 
         if (gradePercent >= 70)
         {
@@ -32,7 +36,7 @@ class Program
         }
         else
         {
-            words = "Try again next time.";
+            words = "You did not pass.  Try again next time.";
             if (gradePercent >= 60)
             {
                 letter = "D";
@@ -42,7 +46,17 @@ class Program
                 letter = "F";
             }
         }
-
-        Console.WriteLine($"You got a grade of {letter}. {words}");
+        if (gradePercent < 95 && gradePercent >= 60)
+        {
+            if (plusMinus >= 7)
+            {
+                sign = "+";
+            }
+            else if (plusMinus < 3)
+            {
+                sign = "-";
+            }
+        }
+        Console.WriteLine($"\nYou got a grade of {letter}{sign}. {words}\n");
     }
 }
