@@ -19,7 +19,7 @@ class Program
 
         if (gradePercent >= 70)
         {
-            words = "Congradulations! You passed the class.";
+            words = "Congratulations! You passed the class.";
 
             if (gradePercent >= 90)
             {
