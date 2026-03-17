@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-
 public class PromptGenerator
 /* Supplies the random journal prompt */
 {
     // variables
-    public List<string> _prompts;
-    public static List<string> ReadFromFile()
+    private List<string> _prompts;
+    private List<string> GetPromptsFromFile()
     /* Gets prompts from file */
     {
         List<string> prompts = new List<string>();
@@ -25,8 +22,10 @@ public class PromptGenerator
     // functions - Behaviors
     public string GetRandomPrompt()
     /* Creates a random prompt from the List _prompts */
+    // Get a random index value and lookup the string in _prompts
+    // return the prompt
     {
-        _prompts = ReadFromFile();
+        _prompts = GetPromptsFromFile();
         int count = _prompts.Count;
         Random rand = new Random();
         int choice = rand.Next(0, count);
