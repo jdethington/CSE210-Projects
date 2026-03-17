@@ -16,7 +16,6 @@ public class Journal
         newEntry._entryText = Console.ReadLine();
         DateTime current = DateTime.Now;
         newEntry._date = current.ToShortDateString();
-        // anEntry = newEntry;
         _entries.Add(newEntry);
     }
     public void DisplayAll()
@@ -24,14 +23,13 @@ public class Journal
     {
         foreach (Entry entryNumber in _entries)
         {
-             entryNumber.Display();
+            entryNumber.Display();
         }
-
     }
-
     public void SaveToFile(string file)
     /* Loop through each item in _entries and save it in a file */
-    {using (StreamWriter outputFile = new StreamWriter(file))
+    {
+        using (StreamWriter outputFile = new StreamWriter(file))
         {
             foreach (Entry entryNumber in _entries)
             {
@@ -42,7 +40,6 @@ public class Journal
             }
         }
     }
-
     public void LoadFromFile(string file)
     /* Loop through each line of the file 
     and create Entry objects to put in the list */
@@ -60,7 +57,36 @@ public class Journal
             anEntry._promptText = parts[1];
 
             _entries.Add(anEntry);
-
         }
+    }
+    public string GetSavedJournals()
+    {
+        string[] lines = System.IO.File.ReadAllLines("fileOfJournalProgramWeekTwo.txt");
+        Boolean redo = true;
+        do
+        {
+            int i = 0;
+            foreach (string line in lines)
+            {
+                i++;
+                Console.WriteLine($"{i}) {line}");
+            }
+            Console.WriteLine($"{i + 1}) Try Again?");
+            Console.WriteLine("Choose a file by number.");
+            string file = Console.ReadLine();
+            int fileNumber = Convert.ToInt16(file);
+            if (fileNumber <= i && fileNumber > 0)
+            {
+                redo = false;
+                return lines[fileNumber - 1];
+            }
+            else if (fileNumber == i + 1)
+            {
+                redo = true;
+            }
+
+        } while (redo);
+        return "";
+
     }
 }

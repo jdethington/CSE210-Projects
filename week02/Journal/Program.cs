@@ -1,25 +1,40 @@
+using System;
+
 class Program
 {
     static void Main(string[] args)
     {
         Journal theJournal = new Journal();
+        string usingFile;
 
         Console.Clear();
         Console.WriteLine("Hello World! This is the Journal Project.\n");
         Console.WriteLine("Welcome to your Journal experience!\n");
-
-        static string DisplayMenu()
+        // await Task.Delay(1000);
+        Thread.Sleep(1000);
+        string loadOrNew;
+        do
         {
-            Console.WriteLine("Please choose from one of the following options.");
-            Console.WriteLine("1: New Journal entry");
-            Console.WriteLine("2: Display Journal entries");
-            Console.WriteLine("3: Load Journal entry");
-            Console.WriteLine("4: Save Journal entry");
-            Console.WriteLine("5: Close Journal(quit)");
-            Console.Write("Choose 1-5: ");
-            return Console.ReadLine().Trim();
-        }
+            Console.Write("Do you want to (L)oad Journal from a file or (N)ew Journal? ");
+            loadOrNew = Console.ReadLine().ToLower();
 
+            switch (loadOrNew)
+            {
+                case "n":
+                    loadOrNew = "l";
+                    SaveFile(theJournal);
+                    break;
+                case "l":
+                    usingFile = theJournal.GetSavedJournals();
+                    theJournal.LoadFromFile(usingFile);
+                    break;
+                default:
+                    break;
+            }
+        } while (loadOrNew != "l");
+
+
+        Console.Clear();
         string choice;
         do
         {
@@ -40,22 +55,23 @@ class Program
             else if (choice == "3")
             // Load Journal entry
             {
-                Console.WriteLine("\nWhat is the name of your Journal file?");
-                Console.Write("> ");
-                string file = Console.ReadLine().Trim();
-                theJournal.LoadFromFile(file);
+                LoadFile(theJournal);
             }
             else if (choice == "4")
             // Save Journal entry
             {
-                Console.WriteLine("\nWhat do you want to save your Journal as?");
-                Console.Write("> ");
-                string file = Console.ReadLine();
-                theJournal.SaveToFile(file);
+                SaveFile(theJournal);
             }
             else if (choice == "5")
             // Quit program
             {
+                // Asks to save on exit
+                Console.WriteLine("Do you want to save you Journal? (Y): ");
+                string needToSave = Console.ReadLine().ToUpper();
+                if (needToSave == "Y")
+                {
+                    SaveFile(theJournal);
+                }
                 Console.Clear();
                 Console.WriteLine("Thank you for adding to your Journal.\n");
             }
@@ -63,7 +79,46 @@ class Program
             // bad choice not 1-5
             {
                 Console.WriteLine($"\n{choice} is not an option. \nPlease choose a correct number.\n");
+                Thread.Sleep(1000);
             }
         } while (choice != "5");
+    }
+    static string DisplayMenu()
+    {
+        Console.WriteLine("Please choose from one of the following options.");
+        Console.WriteLine("1: Write new Journal entry");
+        Console.WriteLine("2: Display Journal entries");
+        Console.WriteLine("3: Load Journal");
+        Console.WriteLine("4: Save Journal");
+        Console.WriteLine("5: Close Journal(quit)");
+        Console.Write("Choose 1-5: ");
+        return Console.ReadLine().Trim();
+    }
+    static void SaveFile(Journal theJournal)
+    {
+        Console.WriteLine("\nWhat is the name of your Journal?");
+        Console.Write("> ");
+        string file = Console.ReadLine();
+        Console.WriteLine($"Saving {file}.......");
+        using (StreamWriter outputFile = new StreamWriter("fileOfJournalProgramWeekTwo.txt", append: true))
+        {
+            outputFile.WriteLine($"{file}");
+        }
+        // await Task.Delay(5000);            
+        Thread.Sleep(5000);
+        theJournal.SaveToFile(file);
+        Console.WriteLine($"{file} saved Successfully!\n");
+    }
+    static void LoadFile(Journal theJournal)
+    {
+        // Console.WriteLine("\nWhat is the name of your Journal file?");
+        // Console.Write("> ");
+        // string file = Console.ReadLine().Trim();
+        string file = theJournal.GetSavedJournals();
+        Console.WriteLine($"Loading {file}.......");
+        Thread.Sleep(1000);
+        theJournal.LoadFromFile(file);
+        Console.WriteLine($"{file} loaded Successfully!\n");
+        Thread.Sleep(1000);
     }
 }
