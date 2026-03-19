@@ -1,7 +1,3 @@
 myJournal.txt
 thisJournal.txt
-thisJournal
 Happy.txt
-today.txt
-
-yesterday.txt

@@ -1,3 +1,8 @@
+/*I did a few things to exceed the requirements.
+
+Made a new method in the object Journal called GetSavedJournlas that gets and displays a list of file names that have been used as a Journal.  
+Then returns that file name to load the journal for use.*/
+
 using System;
 
 class Program
@@ -8,9 +13,8 @@ class Program
         string usingFile;
 
         Console.Clear();
-        Console.WriteLine("Hello World! This is the Journal Project.\n");
+        // Console.WriteLine("Hello World! This is the Journal Project.\n");
         Console.WriteLine("Welcome to your Journal experience!\n");
-        // await Task.Delay(1000);
         Thread.Sleep(1000);
         string loadOrNew;
         do
