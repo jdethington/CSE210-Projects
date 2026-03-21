@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 
 public class Word
 /*Word: Keeps track of a single word and whether it is shown or hidden.*/
@@ -21,6 +20,7 @@ public class Word
         _isHidden = true;
     }
     public void Show()
+    // for later use to add words back in
     {
         _isHidden = false;
     }

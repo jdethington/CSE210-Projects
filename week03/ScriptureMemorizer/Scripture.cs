@@ -7,12 +7,15 @@ public class Scripture
     // Variables
     private Reference _reference;
     private List<Word> _words = new List<Word>();
+    private int _wordsVisible = 0;
     // Instantiate
     public Scripture()
+    // no longer used
     {
         _reference = new Reference();
         string text = "O be wise; what can I say more?";
         List<string> words = text.Split(" ").ToList();
+        
         foreach (string word in words)
         {
             Word newWord = new Word(word);
@@ -20,7 +23,6 @@ public class Scripture
         }
     }
     public Scripture(Reference reference, string text)
-    // Check this!!!
     {
         _reference = reference;
         List<string> words = text.Split(" ").ToList();
@@ -29,10 +31,16 @@ public class Scripture
             Word newWord = new Word(word);
             _words.Add(newWord);
         }
+        _wordsVisible = _words.Count();
     }
     // Methods
     public void HideRandomWords(int numberToHide)
     {
+        if (numberToHide > _wordsVisible)
+        {
+            numberToHide = _wordsVisible;
+        }
+        
         for (int i = 0; i < numberToHide; i++)
         {
             int count = _words.Count();
@@ -42,20 +50,25 @@ public class Scripture
             {
                 i--;
             }
-            _words[choice].Hide();
+            else
+            {
+                _words[choice].Hide();
+            }
         }
+        _wordsVisible -= numberToHide;
     }
 
     public string GetDisplayText()
     {
         string reference = _reference.GetDisplayText();
-        // string scripture = "scripture";
-        string text = reference;// + scripture;
+        string text = reference;
+
         foreach (Word word in _words)
         {
             string newWord = word.GetDisplayText();
             text += newWord + " ";
         }
+        
         return text;
     }
 
@@ -70,6 +83,5 @@ public class Scripture
         }
         return true;
     }
-
 
 }

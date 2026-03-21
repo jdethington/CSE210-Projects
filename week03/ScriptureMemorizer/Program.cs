@@ -1,54 +1,72 @@
 using System;
 
-/* Exceeding Requirements       Here are some ideas you might consider:
+/* Exceeding Requirements    
+Only removes words that are not hidden already
+load scriptures from a files
+created choice of difficulty levels that changes the amount of words removed
 
-1. Think of other challenges that people find when trying to memorize a scripture. 
-    Find a way to have your program help with these challenges.
+Here are some ideas you might consider:
 2. Have your program work with a library of scriptures rather than a single one. 
     Choose scriptures at random to present to the user.
-3. Have the program to load scriptures from a files.
-4. Anything else you can think of!
  */
-/*
-1. Store a scripture, including both the reference 
-    (for example "John 3:16") and the text of the scripture.
-2. Accommodate scriptures with multiple verses, such as "Proverbs 3:5-6".
-3. Clear the console screen and display the complete scripture, 
-    including the reference and the text.
-4. Prompt the user to press the enter key or type quit.
-5. If the user types quit, the program should end.
-6. If the user presses the enter key (without typing quit), 
-    the program should hide a few random words in the scripture, 
-    clear the console screen, and display the scripture again. 
-    (Hiding a word means that the word should be replace by underscores (_) 
-    and the number of underscores should match the number of letters in that word.)
-7. The program should continue prompting the user and hiding more words 
-    until all words in the scripture are hidden.
-8. When all words in the scripture are hidden, the program should end. 
-    (The final display of the scripture should show the scripture with all words hidden.)
-9. When selecting the random words to hide, for the core requirements, 
-    you can select any word at random, even if the word was already hidden. 
-    (As a stretch challenge, 
-    try to randomly select from only those words that are not already hidden.)
-*/
-
 class Program
 {
     static void Main(string[] args)
     {
         Boolean play = true;
+        int difficulty;
+        int difficultyLow = 1;
+        int difficultyHigh = 2;
+
+        Console.Clear();
+        Console.WriteLine("Select difficulty 1-5:");
+        Console.WriteLine("1)  1  word  removed");
+        Console.WriteLine("2) 1-2 words removed");
+        Console.WriteLine("3) 1-3 words removed");
+        Console.WriteLine("4) 2-5 words removed");
+        Console.WriteLine("5) 3-7 words removed");
+        Console.Write("> ");
+        difficulty = Convert.ToInt16(Console.ReadLine());
+       
+        if (difficulty == 2)
+        {
+            difficultyHigh = 3;
+        }
+        else if (difficulty == 3)
+        {
+            difficultyHigh = 4;
+        }
+        else if (difficulty == 4)
+        {
+            difficultyLow = 2;
+            difficultyHigh = 6;
+        }
+        else if (difficulty == 5)
+        {
+            difficultyLow = 3;
+            difficultyHigh = 8;
+        }
+
         // Console.WriteLine("Hello World! This is the ScriptureMemorizer Project.\n");
-        Scripture scripture = new Scripture();
-        Reference reference = new Reference("Proverbs", 3, 5, 6);
-        string scriptureFile = "Trust in the Lord with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.";
-        string scriptureReference = scripture.GetDisplayText();
-        Scripture scripture1 = new Scripture(reference, scriptureFile);
+        string referenceParts = LoadFromFile("refer");
+        string scriptureFile = LoadFromFile("scrip");
+        string[] parts = referenceParts.Split(",");
+        string book = parts[0];
+        int chapt = Convert.ToInt16(parts[1]);
+        int verseStart = Convert.ToInt16(parts[2]);
+        int verseEnd = 0;
+        int countParts = parts.Length;
+        if (countParts == 4)
+        {
+            verseEnd = Convert.ToInt16(parts[3]);
+        }
+
+        Reference reference = new Reference(parts[0], chapt, verseStart, verseEnd);
+        Scripture scripture = new Scripture(reference, scriptureFile);
+
         do
         {
-            // Console.WriteLine(scriptureReference);
-
-            scriptureReference = scripture1.GetDisplayText();
-
+            string scriptureReference = scripture.GetDisplayText();
             Console.Clear();
             Console.WriteLine(scriptureReference);
             Console.WriteLine("\nPress enter to continue or 'quit' to finish: ");
@@ -60,13 +78,45 @@ class Program
             }
             else
             {
-                if (scripture1.IsCompletelyHidden())
+
+                if (scripture.IsCompletelyHidden())
                 {
                     play = false;
                     break;
                 }
-                scripture1.HideRandomWords(3);
+
+                Random rand = new Random();
+                int numWordsToHide = rand.Next(difficultyLow, difficultyHigh);
+                scripture.HideRandomWords(numWordsToHide);
             }
+
         } while (play);
+        
     }
+    static string LoadFromFile(string file)
+    /* Loop through each line of the file 
+    and create strings to put in the list */
+    {
+        string referenceFile = "";
+        string scripture = "";
+        string[] lines = System.IO.File.ReadAllLines("scriptures.txt");
+        
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split("~~");
+            referenceFile = parts[0];
+            scripture = parts[1];
+        }
+
+        if (file == "refer")
+        {
+            return referenceFile;
+        }
+        else if (file == "scrip")
+        {
+            return scripture;
+        }
+        return "";
+    }
+
 }

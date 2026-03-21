@@ -17,6 +17,7 @@ public class Reference
         _endVerse = 0;
     }
     public Reference(string book, int chapter, int verse)
+    // no longer needed
     {
         _book = book;
         _chapter = chapter;
