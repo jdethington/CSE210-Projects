@@ -1,6 +1,6 @@
 /*I did a few things to exceed the requirements.
 
-Made a new method in the object Journal called GetSavedJournlas that gets and displays a list of file names that have been used as a Journal.  
+Made a new method in the object Journal called GetSavedJournals that gets and displays a list of file names that have been used as a Journal.  
 Then returns that file name to load the journal for use.*/
 
 using System;

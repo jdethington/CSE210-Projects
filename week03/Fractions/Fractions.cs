@@ -2,9 +2,11 @@ using System;
 
 public class Fractions
 {
+    // Variables
     private int _top;
     private int _bottom;
 
+    // Instantiate 
     public Fractions()
     {
         _top = 1;
@@ -20,7 +22,7 @@ public class Fractions
         _top = top;
         _bottom = bottom;
     }
-
+    // Methods
     public int GetTop()
     {
         return _top;
