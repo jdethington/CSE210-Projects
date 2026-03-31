@@ -22,7 +22,7 @@ public class Video
     public string Display()
     {
         string display;
-        display = $"Title:    {_title}\nAuthor:   {_author}\nLength:   {_length} seconds\nComments: {_comments.Count()}";
+        display = $"Title:    {_title}\nAuthor:   {_author}\nLength:   {_length} seconds\nComments: {NumberOfComments()}";
         string comments = "";
         foreach (Comment comment in _comments)
         {
@@ -32,5 +32,9 @@ public class Video
         display = $"{display}\n{comments}===============================================================";
         return display;
 
+    }
+    private int NumberOfComments()
+    {
+        return _comments.Count();
     }
 }

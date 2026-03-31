@@ -8,9 +8,6 @@ class Program
         string title = "title";
         string author = "author";
         int length = 250;
-        // string name = "Name";
-        // string comment = "Comment";
-        // string displayText;
 
         title = "Learn Python in 10 Minutes";
         author = "CodeMaster";
@@ -25,16 +22,12 @@ class Program
         v2.StoreComment("Eve", "Fascinating stuff!");
         v2.StoreComment("Frank", "I learned so much from this.");
         v2.StoreComment("Grace", "More videos on this topic please!");
-        // v1.StoreComment("Dana", "Thanks for the clear explanations!");
 
         Video v3 = new Video("Easy 15-Minute Meals for Beginners", "ChefJoy", 900);
         v3.StoreComment("Henry", "Tried the pasta recipe - delicious!");
         v3.StoreComment("Ivy", "Simple ingredients and quick to make.");
         v3.StoreComment("Jack", "Yum! My family loved it.");
-        // v1.StoreComment("Dana", "Thanks for the clear explanations!");
 
-        // displayText = v1.Display();
-        // Console.WriteLine(displayText);
         Console.Clear();
         Console.WriteLine("===============================================================");
         Console.WriteLine(v1.Display());
