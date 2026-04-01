@@ -29,7 +29,8 @@ public class Video
             comments = $"{comments}{comment.DisplayComment()}";
 
         }
-        display = $"{display}\n{comments}===============================================================";
+        comments = $"{comments}\t  --------------------------------------------------";
+        display = $"======================================================================\n{display}\n{comments}";
         return display;
 
     }

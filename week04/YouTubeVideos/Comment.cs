@@ -14,6 +14,6 @@ public class Comment
     public string DisplayComment()
     {
         string display;
-        return display = $"\t  Name:    {_commenterName}\n\t  Comment: {_comment}\n";
+        return display = $"\t  --------------------------------------------------\n\t  Name:    {_commenterName}\n\t  Comment: {_comment}\n";
     }
 }
