@@ -2,14 +2,19 @@ using System;
 
 public class Activity
 {
-    protected string _name;
-    protected string _description;
-    protected int _duration;
-    protected int _pause = 2;
+    private string _name;
+    private string _description;
+    private int _duration;
+    private int _pause = 3;
 
-    public Activity()
+    public Activity(string name, string description)
     {
-
+        _name = name;
+        _description = description;
+    }
+    public int GetDuration()
+    {
+        return _duration;
     }
     public void DisplayStartingMessage()
     {
@@ -30,19 +35,17 @@ public class Activity
         ShowSpinner(_pause);
         Console.WriteLine($"\nYou have completed another {_duration} seconds of {_name} Activity");
         ShowSpinner(_pause);
-
     }
     public void ShowSpinner(int seconds)
     {
-        List<string> spinner = new List<string> { "|", "/", "-", "\\", "|", "/", "-", "\\" };
+        List<string> spinner = new List<string> { "|", "/", "-", "\\" };
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(seconds);
         int i = 0;
         while (DateTime.Now < endTime)
         {
-            string s = spinner[i];
-            Console.Write(s);
-            Thread.Sleep(1000);
+            Console.Write(spinner[i]);
+            Thread.Sleep(250);
             Console.Write("\b \b");
             i++;
             if (i >= spinner.Count)
@@ -50,7 +53,6 @@ public class Activity
                 i = 0;
             }
         }
-        // Console.WriteLine("Done.");
     }
     public void ShowCountDown(int seconds)
     {
@@ -60,6 +62,5 @@ public class Activity
             Thread.Sleep(1000);
             Console.Write("\b \b");
         }
-
     }
 }

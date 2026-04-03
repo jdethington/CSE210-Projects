@@ -1,5 +1,8 @@
 using System;
 
+// Exceeding requirements
+// No questions are repeated until all have been used.
+// Better animation for Breathing Activity
 class Program
 {
     static void Main(string[] args)
@@ -13,8 +16,9 @@ class Program
             switch (choice)
             {
                 case "1":
-                    BreathingActivity breathing = new BreathingActivity();
-                    breathing.Run();
+                    // BreathingActivity breathing = new BreathingActivity();
+                    // breathing.Run();
+                    new BreathingActivity().Run();
                     break;
                 case "2":
                     ReflectingActivity reflecting = new ReflectingActivity();
@@ -26,7 +30,7 @@ class Program
                     break;
                 case "4":
                     activity = false;
-                    Console.WriteLine("Thank you for playing!");
+                    Console.WriteLine("Thank you for taking time for your mindfulness practice today!");
                     break;
                 default:
                     Console.Write("Please input a correct number.  ");
@@ -56,6 +60,7 @@ class Program
             Console.WriteLine("\t4. Quit");
             Console.Write("Select a choice from the menu: ");
             string choice = Console.ReadLine().Trim();
+            
             return choice;
         }
     }
