@@ -5,6 +5,7 @@ public class Activity
     protected string _name;
     protected string _description;
     protected int _duration;
+    protected int _pause = 2;
 
     public Activity()
     {
@@ -18,16 +19,17 @@ public class Activity
         _duration = Convert.ToInt32(Console.ReadLine());
         Console.Clear();
         Console.Write("Get ready to begin... ");
-        ShowSpinner(8);
+        ShowSpinner(_pause);
         Console.WriteLine();
 
     }
     public void DisplayEndingMessage()
     {
+        _pause = 3;
         Console.WriteLine("\nWell done!!");
-        ShowSpinner(8);
+        ShowSpinner(_pause);
         Console.WriteLine($"\nYou have completed another {_duration} seconds of {_name} Activity");
-        ShowSpinner(8);
+        ShowSpinner(_pause);
 
     }
     public void ShowSpinner(int seconds)
@@ -40,7 +42,7 @@ public class Activity
         {
             string s = spinner[i];
             Console.Write(s);
-            Thread.Sleep(500);
+            Thread.Sleep(1000);
             Console.Write("\b \b");
             i++;
             if (i >= spinner.Count)
