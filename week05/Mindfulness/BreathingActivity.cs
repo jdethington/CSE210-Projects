@@ -12,10 +12,6 @@ public class BreathingActivity : Activity
     public void Run()
     {
         DisplayStartingMessage();
-        Console.Clear();
-        Console.Write("Get ready to begin... ");
-        ShowSpinner(5);
-        Console.WriteLine();
         // Console.Clear();
 
         DateTime startTime = DateTime.Now;

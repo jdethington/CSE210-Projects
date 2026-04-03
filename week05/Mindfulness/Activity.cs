@@ -16,13 +16,18 @@ public class Activity
         Console.WriteLine($"Welcome to the {_name} Activity.\n\n{_description}\n");
         Console.Write("How long, in seconds, would you like for your session? ");
         _duration = Convert.ToInt32(Console.ReadLine());
+        Console.Clear();
+        Console.Write("Get ready to begin... ");
+        ShowSpinner(8);
+        Console.WriteLine();
+
     }
     public void DisplayEndingMessage()
     {
         Console.WriteLine("\nWell done!!");
-        ShowSpinner(5);
+        ShowSpinner(8);
         Console.WriteLine($"\nYou have completed another {_duration} seconds of {_name} Activity");
-        ShowSpinner(5);
+        ShowSpinner(8);
 
     }
     public void ShowSpinner(int seconds)
@@ -35,7 +40,7 @@ public class Activity
         {
             string s = spinner[i];
             Console.Write(s);
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             Console.Write("\b \b");
             i++;
             if (i >= spinner.Count)
