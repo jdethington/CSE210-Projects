@@ -4,6 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.Clear();
         Console.WriteLine("\nHello World! This is the ExerciseTracking Project.\n");
 
         string date = DateTime.Today.ToString("dd MMM yyyy");
